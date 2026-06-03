@@ -1,0 +1,17 @@
+# TradeLink Backend - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Web framework
+fastapi==0.115.6
+
+# ASGI server (with standard extras for auto-reload, etc.)
+uvicorn[standard]==0.34.0
+
+# PostgreSQL adapter (pre-compiled, no system dependencies needed)
+psycopg2-binary==2.9.10
+
+# Load .env files into environment variables
+python-dotenv==1.0.1
+
+# Async HTTP client (for calling Supabase Auth REST API)
+httpx==0.28.1

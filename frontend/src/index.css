@@ -1,0 +1,493 @@
+@import "tailwindcss";
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Custom TradeLink Design System */
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-navy: #1B2A4A;
+    --color-navy-dark: #0F1A2E;
+    --color-orange: #E8751A;
+    --color-orange-dark: #A8500F;
+    
+    /* Status Colors */
+    --color-success: #27AE60;
+    --color-warning: #E74C3C;
+    
+    /* Typography */
+    --font-family: 'Inter', system-ui, sans-serif;
+    
+    /* Font Sizes */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --text-xl: 24px;
+    --text-2xl: 32px;
+    
+    /* Font Weights */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  body {
+    font-family: var(--font-family);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    color: #1f2937;
+    background-color: #f9fafb;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-bold);
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+  
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  
+  h2 {
+    font-size: var(--text-xl);
+  }
+  
+  h3 {
+    font-size: var(--text-lg);
+  }
+}
+
+@layer components {
+  /* Button Styles */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-navy);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-navy);
+    color: white;
+    min-height: 48px;
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-navy-dark);
+  }
+  
+  .btn-secondary {
+    background-color: white;
+    color: var(--color-navy);
+    border: 2px solid var(--color-navy);
+    min-height: 48px;
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #f9fafb;
+  }
+  
+  .btn-cta {
+    background-color: var(--color-orange);
+    color: white;
+    min-height: 56px;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+  
+  .btn-cta:hover {
+    background-color: var(--color-orange-dark);
+  }
+  
+  .btn-3d {
+    background-color: var(--color-orange);
+    color: white;
+    font-weight: 700;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 0 #A8500F, 0 6px 10px rgba(0, 0, 0, 0.15);
+    min-height: 48px;
+    padding: 14px 28px;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  
+  .btn-3d:hover {
+    box-shadow: 0 6px 0 #A8500F, 0 8px 14px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .btn-3d:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #A8500F, 0 3px 6px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Form Styles */
+  .form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 16px;
+    transition: all 0.2s;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--color-navy);
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-navy);
+    margin-bottom: 8px;
+  }
+  
+  .form-error {
+    font-size: 12px;
+    color: #ef4444;
+    margin-top: 4px;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: white;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-navy {
+    background-color: var(--color-navy);
+    color: white;
+    border-radius: 0.75rem;
+  }
+  
+  .card-orange {
+    background-color: var(--color-orange);
+    color: white;
+    border-radius: 0.75rem;
+  }
+  
+  /* Badge Styles */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .badge-ai {
+    background-color: var(--color-orange);
+    color: white;
+  }
+  
+  .badge-urgent {
+    background-color: #fee2e2;
+    color: #991b1b;
+  }
+  
+  .badge-normal {
+    background-color: #dbeafe;
+    color: #1e40af;
+  }
+  
+  /* Job Visual Styles */
+  .job-visual {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .job-visual-carpentry {
+    background: linear-gradient(135deg, #1B2A4A 0%, #3B4D70 100%);
+  }
+  
+  .job-visual-plumbing {
+    background: linear-gradient(135deg, #1B2A4A 0%, #0F4C5C 100%);
+  }
+  
+  .job-visual-electrical {
+    background: linear-gradient(135deg, #1B2A4A 0%, #E8751A 100%);
+  }
+  
+  .job-visual-roofing {
+    background: linear-gradient(135deg, #1B2A4A 0%, #475569 100%);
+  }
+  
+  .job-visual-landscaping {
+    background: linear-gradient(135deg, #1B2A4A 0%, #1F4A3A 100%);
+  }
+  
+  .job-visual-tiling {
+    background: linear-gradient(135deg, #1B2A4A 0%, #A8500F 100%);
+  }
+  
+  .job-visual-painting {
+    background: linear-gradient(135deg, #1B2A4A 0%, #5B2A4A 100%);
+  }
+  
+  /* AI Scope Card */
+  .ai-scope-card {
+    padding: 24px;
+    border-radius: 0.75rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1B2A4A 0%, #E8751A 100%);
+  }
+  
+  .ai-scope-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(27, 42, 74, 0.9) 0%, rgba(232, 117, 26, 0.9) 100%);
+    z-index: 1;
+  }
+  
+  .ai-scope-card > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Confidence Indicator */
+  .confidence-dots {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .confidence-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  
+  .confidence-dot.filled {
+    background-color: white;
+  }
+  
+  .confidence-dot.empty {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Profile Dropdown */
+  .profile-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 8px;
+    width: 256px;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    padding: 8px 0;
+    z-index: 50;
+  }
+  
+  .profile-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #374151;
+    transition: background-color 0.2s;
+  }
+  
+  .profile-dropdown-item:hover {
+    background-color: #f9fafb;
+  }
+  
+  /* Header */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Logo */
+  .logo-badge {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-navy);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  
+  .logo-wordmark {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .logo-trade {
+    color: #1B2A4A;
+  }
+  
+  .logo-link {
+    color: #E8751A;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities */
+  .text-navy {
+    color: #1B2A4A;
+  }
+  
+  .text-orange {
+    color: #E8751A;
+  }
+  
+  .bg-navy {
+    background-color: #1B2A4A;
+  }
+  
+  .bg-orange {
+    background-color: #E8751A;
+  }
+  
+  .border-navy {
+    border-color: #1B2A4A;
+  }
+  
+  .border-orange {
+    border-color: #E8751A;
+  }
+  
+  /* Responsive grid */
+  .grid-jobs {
+    display: grid;
+    gap: 24px;
+  }
+  
+  @media (min-width: 768px) {
+    .grid-jobs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Layout splits */
+  .split-60-40 {
+    display: grid;
+    gap: 32px;
+  }
+  
+  @media (min-width: 1024px) {
+    .split-60-40 {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+  
+  /* Form section */
+  .form-section {
+    background-color: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 24px;
+  }
+  
+  /* Success state */
+  .success-checkmark {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+  }
+  
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 48px 0;
+    color: #6b7280;
+  }
+  
+  /* Trade-specific icon colors */
+  .icon-navy {
+    color: #1B2A4A;
+  }
+  
+  .icon-teal {
+    color: #0F4C5C;
+  }
+  
+  .icon-orange {
+    color: #E8751A;
+  }
+  
+  .icon-slate {
+    color: #475569;
+  }
+  
+  .icon-forest {
+    color: #1F4A3A;
+  }
+  
+  .icon-plum {
+    color: #5B2A4A;
+  }
+}
