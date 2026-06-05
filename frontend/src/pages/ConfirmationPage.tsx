@@ -13,10 +13,12 @@ import {
   LogOut, 
   FileText,
   Sparkles,
-  Clock
+  Clock,
+  Loader2
 } from 'lucide-react';
 import type { ConfirmationPageProps } from '../types';
 import Logo from '../components/ui/Logo';
+import { getMyQuotes, getSavedJobs } from '../lib/backendApi';
 
 /**
  * Confirmation page component
@@ -25,23 +27,31 @@ import Logo from '../components/ui/Logo';
 const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ state, callbacks }) => {
   const navigate = useNavigate();
 
-  // Get stats from localStorage
-  const [stats, setStats] = useState({
-    submittedQuotes: 0,
-    savedJobIds: 0,
-    recentlyViewedIds: 0
-  });
+  // Stats: null = loading, number = loaded, -1 = fetch error
+  const [quotesCount, setQuotesCount] = useState<number | null>(null);
+  const [savedCount, setSavedCount] = useState<number | null>(null);
+  const [recentlyViewedCount, setRecentlyViewedCount] = useState(0);
 
   useEffect(() => {
-    const submittedQuotes = JSON.parse(localStorage.getItem('tradelink_submittedQuotes') || '[]');
-    const savedJobIds = JSON.parse(localStorage.getItem('tradelink_savedJobIds') || '[]');
+    // Recently viewed from localStorage (no backend equivalent)
     const recentlyViewedIds = JSON.parse(localStorage.getItem('tradelink_recentlyViewedIds') || '[]');
-    
-    setStats({
-      submittedQuotes: submittedQuotes.length,
-      savedJobIds: savedJobIds.length,
-      recentlyViewedIds: recentlyViewedIds.length
-    });
+    setRecentlyViewedCount(recentlyViewedIds.length);
+
+    // Fetch live counts from backend
+    const token = localStorage.getItem('tradelink_token');
+    if (!token) {
+      setQuotesCount(-1);
+      setSavedCount(-1);
+      return;
+    }
+
+    getMyQuotes(token)
+      .then((quotes) => setQuotesCount(quotes.length))
+      .catch(() => setQuotesCount(-1));
+
+    getSavedJobs(token)
+      .then((jobIds) => setSavedCount(jobIds.length))
+      .catch(() => setSavedCount(-1));
   }, []);
 
   // Get the most recently submitted quote
@@ -235,15 +245,27 @@ const ConfirmationPage: React.FC<ConfirmationPageProps> = ({ state, callbacks })
           {/* Stats */}
           <div className="mt-6 grid grid-cols-3 gap-4">
             <div className="text-center p-4 bg-white rounded-xl border border-gray-200">
-              <p className="text-2xl font-bold text-navy">{stats.submittedQuotes}</p>
+              {quotesCount === null ? (
+                <Loader2 size={24} className="animate-spin text-navy mx-auto" />
+              ) : quotesCount === -1 ? (
+                <p className="text-2xl font-bold text-gray-400">—</p>
+              ) : (
+                <p className="text-2xl font-bold text-navy">{quotesCount}</p>
+              )}
               <p className="text-sm text-gray-600">Quotes Sent</p>
             </div>
             <div className="text-center p-4 bg-white rounded-xl border border-gray-200">
-              <p className="text-2xl font-bold text-orange">{stats.savedJobIds}</p>
+              {savedCount === null ? (
+                <Loader2 size={24} className="animate-spin text-orange mx-auto" />
+              ) : savedCount === -1 ? (
+                <p className="text-2xl font-bold text-gray-400">—</p>
+              ) : (
+                <p className="text-2xl font-bold text-orange">{savedCount}</p>
+              )}
               <p className="text-sm text-gray-600">Jobs Saved</p>
             </div>
             <div className="text-center p-4 bg-white rounded-xl border border-gray-200">
-              <p className="text-2xl font-bold text-navy">{stats.recentlyViewedIds}</p>
+              <p className="text-2xl font-bold text-navy">{recentlyViewedCount}</p>
               <p className="text-sm text-gray-600">Recently Viewed</p>
             </div>
           </div>
